@@ -74,7 +74,7 @@ namespace MyDemoIssuer
 
             resp.accountHolderInfo= new AccountHolderInfo();
 
-            resp.accountHolderInfo.accountHolderEmailAddress = "mytest@email.com";
+            resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
 
             resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
             resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
