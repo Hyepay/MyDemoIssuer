@@ -70,7 +70,7 @@ namespace MyDemoIssuer
             resp.addressVerifiationResult = "MATCH";
 
             resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
-            resp.decision = "AUTHENTICATE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+            resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
 
             resp.accountHolderInfo= new AccountHolderInfo();
 
