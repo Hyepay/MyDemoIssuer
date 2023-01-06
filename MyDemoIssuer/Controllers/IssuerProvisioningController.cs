@@ -53,7 +53,7 @@ namespace MyDemoIssuer
         //public async Task<ActionResult<TestClass>> Verify(ProvisionningVerificaionRequest provisionningRequest)
         {
 
-            _logger.LogInformation(" Get THE ProvisionningVerificaionRequest  ");
+            _logger.LogInformation(" Get the ProvisionningVerificaionRequest  ");
 
 
             // Decrypt the JWE 
