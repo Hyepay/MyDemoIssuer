@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 Serilog.Core.Logger logger = new LoggerConfiguration()
    .ReadFrom.Configuration(builder.Configuration)
    .Enrich.FromLogContext()
-   .WriteTo.RollingFile("../logs/webapi.log")
+   .WriteTo.RollingFile("./logs/mydemoissuer.log")
    .CreateLogger();
 
 
