@@ -8,15 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Create Serilog logger 
 
-/*Serilog.Core.Logger logger = new LoggerConfiguration()
-  .ReadFrom.Configuration(builder.Configuration)
-  .Enrich.FromLogContext()
-  .CreateLogger();*/
+// Using RoolinFile with Rolling packahe to write log to Azure logs. 
 
 Serilog.Core.Logger logger = new LoggerConfiguration()
    .ReadFrom.Configuration(builder.Configuration)
    .Enrich.FromLogContext()
-   .WriteTo.RollingFile("./logs/mydemoissuer.log")
+   .WriteTo.RollingFile("../logs/mydemoissuer.log")
    .CreateLogger();
 
 
