@@ -1,15 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Serilog.Events;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Create Serilog logger 
 
-Serilog.Core.Logger logger = new LoggerConfiguration()
+/*Serilog.Core.Logger logger = new LoggerConfiguration()
   .ReadFrom.Configuration(builder.Configuration)
   .Enrich.FromLogContext()
-  .CreateLogger();
+  .CreateLogger();*/
+
+Serilog.Core.Logger logger = new LoggerConfiguration()
+   .ReadFrom.Configuration(builder.Configuration)
+   .Enrich.FromLogContext()
+   .WriteTo.RollingFile("../logs/webapi.log")
+   .CreateLogger();
 
 
 // Add services to the container.
