@@ -60,29 +60,106 @@ namespace MyDemoIssuer
 
             // Check the data 
 
-            var resp = new ProvisionningverificationResponse();
+            if (provisionningRequest.requestId == "123456")     // Test 200 Valid Response 
+            {
+                var resp = new ProvisionningverificationResponse();
 
-            // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); /* For test */
 
-            resp.SecurityCodeVerifiationResult = "MATCH";
-            resp.phoneVerifiationResult = "MATCH";
-            resp.emailVerifiationResult = "MATCH";
-            resp.addressVerifiationResult = "MATCH";
+                resp.SecurityCodeVerifiationResult = "MATCH";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
 
-            resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
-            resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
 
-            resp.accountHolderInfo= new AccountHolderInfo();
+                resp.accountHolderInfo = new AccountHolderInfo();
 
-            resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
 
-            resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
-            resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
-            resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222"; 
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
 
 
-            return Ok(resp);
-            //return BadRequest(test); /* For test */
+                return Ok(resp);
+            }
+
+
+            if (provisionningRequest.requestId == "123457")     // Test 200 Valid Response AUTH REQUIRE 
+            {
+                var resp = new ProvisionningverificationResponse();
+
+                // var test = new TestClass(); /* For test */
+
+                resp.SecurityCodeVerifiationResult = "MATCH";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
+
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                resp.decision = "AUTHENTICATE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                resp.accountHolderInfo = new AccountHolderInfo();
+
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
+
+
+                return Ok(resp);
+            }
+
+
+            if (provisionningRequest.requestId == "111111")     // Test 200 Valid Response but missed field decision
+            {
+
+                var resp = new ProvisionningverificationResponse();
+
+                // var test = new TestClass(); /* For test */
+
+                resp.SecurityCodeVerifiationResult = "MATCH";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
+
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                //resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                resp.accountHolderInfo = new AccountHolderInfo();
+
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
+
+                return Ok(resp);
+            }
+
+            if (provisionningRequest.requestId == "222222")     // Test 400 Error
+            {
+
+
+                // var test = new TestClass(); /* For test */
+
+                return BadRequest();
+            }
+
+            if (provisionningRequest.requestId == "333333")     // Test 500 Error
+            {
+
+
+                // var test = new TestClass(); /* For test */
+
+                return Problem();
+            }
+
+
+            return BadRequest(); /* For test */
         }
 
 
