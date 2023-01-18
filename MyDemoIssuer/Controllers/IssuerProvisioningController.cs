@@ -164,7 +164,7 @@ namespace MyDemoIssuer
 
 
 
-        [HttpPost("IssuerDeliverActivationcode")]
+        [HttpPost("api/v1/digitization/IssuerDeliverActivationcode")]
 
         public async Task<ActionResult<ActivationCodeDeliveryResponse>> DeliverActivationCode(ActivationCodeDeliveryRequest activationCodeDeliveryRequest)
         {
