@@ -17,16 +17,16 @@
 
     public class CardData
     {
-        public string? accountNumber { get; set; }
-        public string? expiryDate { get; set; }
-        public string? securityCode { get; set; }
+        public string accountNumber { get; set; }
+        public string expiryDate { get; set; }
+        public string securityCode { get; set; }
     }
 
     public class FundingAccountData
     {
-        public CardData? cardData { get; set; }
+        public CardData cardData { get; set; }
 
-        public AccountHolderData? accountHolderData { get; set; }
+        public AccountHolderData accountHolderData { get; set; }
     }
 
     public class AccountHolderData
@@ -47,10 +47,10 @@
 
     public class ProvisionningVerificaionRequest {
 
-            public string? issuerId { get; set; }
-            public string? requestId { get; set; }
+            public string  issuerId { get; set; }
+            public string  requestId { get; set; }
 
-            public string? correlationId { get; set; }
+            public string   correlationId { get; set; }
         public FundingAccountData fundingAccountData { get; set; }
 
 
