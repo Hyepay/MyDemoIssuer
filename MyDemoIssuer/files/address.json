@@ -1,0 +1,9 @@
+{
+  "name": "MyName",
+  "address": "10 rue mars",
+  "locality": "Paris",
+  "administrativeArea": "Paris",
+  "countryCode": "FR",
+  "postalCode": "75150",
+  "phoneNumber": "0601010101"
+}

@@ -12,6 +12,10 @@ using MyIssuerDemo.Data;
 
 
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Net;
 
 
 
@@ -187,6 +191,26 @@ namespace MyDemoIssuer
             var resp = new NotificationTokenUpdateResponse();
             resp.responseId = notificationTokenUpdateRequest.requestId;
             return Ok(resp);
+
+
+        }
+
+
+        [HttpGet("api/v1/digitization/getPushProvisioningData")]
+
+        public async Task<ActionResult<GoogleWalletAddress>> GetPushData ()
+        {
+            _logger.LogInformation(" Get Push Provisioning Data  ");
+
+            GoogleWalletAddress address;
+
+            using (StreamReader r = new StreamReader("C:\\Users\\Jamal\\source\\repos\\MyDemoIssuer\\MyDemoIssuer\\files\\address.json"))
+            {
+                string json = r.ReadToEnd();
+                 address = JsonConvert.DeserializeObject<GoogleWalletAddress>(json);
+            }
+
+            return Ok(address);
 
 
         }
