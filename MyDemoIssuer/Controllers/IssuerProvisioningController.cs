@@ -164,7 +164,7 @@ namespace MyDemoIssuer
 
 
 
-        [HttpPost("api/v1/digitization/IssuerDeliverActivationcode")]
+        [HttpPost("api/v1/digitization/deliverActivationcode")]
 
         public async Task<ActionResult<ActivationCodeDeliveryResponse>> DeliverActivationCode(ActivationCodeDeliveryRequest activationCodeDeliveryRequest)
         {
@@ -172,6 +172,20 @@ namespace MyDemoIssuer
 
             var resp = new ActivationCodeDeliveryResponse();
             resp.responseId = activationCodeDeliveryRequest.requestId;
+            return Ok(resp);
+
+
+        }
+
+        
+        [HttpPost("api/v1/digitization/notifyTokenUpdate")]
+
+        public async Task<ActionResult<NotificationTokenUpdateResponse>> NotifyTokenUpdate(NotificationTokenUpdateRequest notificationTokenUpdateRequest)
+        {
+            _logger.LogInformation(" Get the NotifyTokenUpdate  Request  ");
+
+            var resp = new NotificationTokenUpdateResponse();
+            resp.responseId = notificationTokenUpdateRequest.requestId;
             return Ok(resp);
 
 

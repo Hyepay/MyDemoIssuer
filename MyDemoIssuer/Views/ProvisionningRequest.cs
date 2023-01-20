@@ -50,7 +50,8 @@
             public string? issuerId { get; set; }
             public string? requestId { get; set; }
 
-            public FundingAccountData fundingAccountData { get; set; }
+            public string? correlationId { get; set; }
+        public FundingAccountData fundingAccountData { get; set; }
 
 
         public ProvisionningVerificaionRequest ()

@@ -38,9 +38,9 @@ public class ActivationCodeDeliveryRequest
         public ActivationMethod activationMethod { get; set; }
         public List<string>? reasonCodes { get; set; }  //   "reasonCodes": [   "ADD_CARD" ]
 
-        public DeviceInfo  deviceInfo { get; set; }
+        public DeviceInfo?  deviceInfo { get; set; }
 
-        public TokenRequestorInfo tokenRequestorInfo { get; set;}
+        public TokenRequestorInfo? tokenRequestorInfo { get; set;}
 
 
     }
