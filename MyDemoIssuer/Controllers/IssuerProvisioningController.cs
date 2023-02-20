@@ -204,7 +204,8 @@ namespace MyDemoIssuer
 
             GoogleWalletAddress address;
 
-            using (StreamReader r = new StreamReader("C:\\Users\\Jamal\\source\\repos\\MyDemoIssuer\\MyDemoIssuer\\files\\address.json"))
+            //using (StreamReader r = new StreamReader("C:\\Users\\Jamal\\source\\repos\\MyDemoIssuer\\MyDemoIssuer\\files\\address.json"))
+            using (StreamReader r = new StreamReader("./files/address.json"))
             {
                 string json = r.ReadToEnd();
                  address = JsonConvert.DeserializeObject<GoogleWalletAddress>(json);
