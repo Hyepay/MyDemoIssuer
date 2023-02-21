@@ -1,0 +1,20 @@
+{
+    "opc": "eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00iLCJraWQiOiIxMjM0NTY3OTEyMzY1NDc5In0.HsF1_6-QhNXnSwkqqFwamVKTTXmSVKzwlV1EYMQee7ADUNlQCy8pG7VzypzGH1D6--mdZ4wMjuURyp_bd2GoKH0yTuNuDS6uIGqV8k1P6VbWwowruULb927uJdg-9JRokaWOCAyM4A5VOz6hsqtwA7kvzJOSb4Csp4MHxdRMFEui-i7x0BLoct7-Ct9390BksnQ92UAz88bsHoyz5OMhh_UlUM3ZeRGlm_7ZafrPXKVoWt-P4csuARErC6h13zHmfpRBchBmG0HPbSiNGFVRv1nYYo0KiXgsx0OYYPYykufT03iRZ0lvxeUFGG6H7VwLBbNkVPxdyX6kqSkV3ZWA.7IlJ2L2XjowbeMk4.6mqEpsI8dFcykB3MD6OdilQyAIouK0gW-L5MGpTYAzcfTYXrwGaQ7KpQ7g.0IkJnQaB7PCJCriz2qk",
+    "card": {
+        "accountNumber": "5432111212124545",
+        "expiryDate": "1123",
+        "securityCode": "123"
+    },
+    "network": "mastercard",
+    "cardHolderName": "My Name",
+    "address": {
+        "name": "MyName",
+        "address": "10 rue mars",
+        "locality": "Paris",
+        "administrativeArea": "Paris",
+        "countryCode": "FR",
+        "postalCode": "75150",
+        "phoneNumber": "0601010101"
+    }
+}
+

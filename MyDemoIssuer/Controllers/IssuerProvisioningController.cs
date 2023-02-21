@@ -198,20 +198,20 @@ namespace MyDemoIssuer
 
         [HttpGet("api/v1/digitization/getPushProvisioningData")]
 
-        public async Task<ActionResult<GoogleWalletAddress>> GetPushData ()
+        public async Task<ActionResult<TestData>> GetPushData ()
         {
-            _logger.LogInformation(" Get Push Provisioning Data  ");
+            _logger.LogInformation(" Start Push Provisioning Data  ");
 
-            GoogleWalletAddress address;
+            TestData data;
 
             //using (StreamReader r = new StreamReader("C:\\Users\\Jamal\\source\\repos\\MyDemoIssuer\\MyDemoIssuer\\files\\address.json"))
-            using (StreamReader r = new StreamReader("./files/address.json"))
+            using (StreamReader r = new StreamReader("../../Data/testdata.json"))
             {
                 string json = r.ReadToEnd();
-                 address = JsonConvert.DeserializeObject<GoogleWalletAddress>(json);
+                 data = JsonConvert.DeserializeObject<TestData>(json);
             }
 
-            return Ok(address);
+            return Ok(data);
 
 
         }

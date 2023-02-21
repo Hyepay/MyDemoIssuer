@@ -91,7 +91,20 @@
             public string? phoneNumber { get; set; }
   
 
-}
+    }
+
+    public class TestData
+    {
+        public string? opc { get; set; }
+
+        public CardData? card { get; set; }
+
+        public string? network { get; set; }
+
+        public string? cardHolderName { get; set; }
+        public GoogleWalletAddress? address { get; set; }
+    }
+
 
   
 
