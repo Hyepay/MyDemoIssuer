@@ -64,7 +64,7 @@ namespace MyDemoIssuer
 
             // Check the data 
 
-            if (provisionningRequest.requestId == "123456")     // Test 200 Valid Response 
+            if (provisionningRequest.correlationId == "123456")     // Test 200 Valid Response 
             {
                 var resp = new ProvisionningverificationResponse();
 
@@ -91,7 +91,7 @@ namespace MyDemoIssuer
             }
 
 
-            if (provisionningRequest.requestId == "123457")     // Test 200 Valid Response AUTH REQUIRE 
+            if (provisionningRequest.correlationId == "123457")     // Test 200 Valid Response AUTH REQUIRE 
             {
                 var resp = new ProvisionningverificationResponse();
 
@@ -118,7 +118,7 @@ namespace MyDemoIssuer
             }
 
 
-            if (provisionningRequest.requestId == "111111")     // Test 200 Valid Response but missed field decision
+            if (provisionningRequest.correlationId == "111111")     // Test 200 Valid Response but missed field decision
             {
 
                 var resp = new ProvisionningverificationResponse();
@@ -144,7 +144,7 @@ namespace MyDemoIssuer
                 return Ok(resp);
             }
 
-            if (provisionningRequest.requestId == "222222")     // Test 400 Error
+            if (provisionningRequest.correlationId == "222222")     // Test 400 Error
             {
 
 
@@ -153,17 +153,62 @@ namespace MyDemoIssuer
                 return BadRequest();
             }
 
-            if (provisionningRequest.requestId == "333333")     // Test 500 Error
+            if (provisionningRequest.correlationId == "333333")     // Test 500 Error
             {
 
 
                 // var test = new TestClass(); /* For test */
 
-                return Problem();
+               
+
+                               var resp = new ProvisionningverificationResponse();
+
+                // var test = new TestClass(); /* For test */
+
+                resp.SecurityCodeVerifiationResult = "XXX";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
+
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                //resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                resp.accountHolderInfo = new AccountHolderInfo();
+
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
+
+                return Ok(resp);
             }
+            else
+            {
+
+                var resp = new ProvisionningverificationResponse();
+
+                // var test = new TestClass(); /* For test */
+
+                resp.SecurityCodeVerifiationResult = "INVALID";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
+
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                resp.decision = "AUTHENTICATE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                resp.accountHolderInfo = new AccountHolderInfo();
+
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
 
 
-            return BadRequest(); /* For test */
+                return Ok(resp);
+            }
         }
 
 
