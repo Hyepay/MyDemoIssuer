@@ -74,6 +74,7 @@ namespace MyDemoIssuer
                 resp.phoneVerifiationResult = "MATCH";
                 resp.emailVerifiationResult = "MATCH";
                 resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "MATCH";
 
                 resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
                 resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
@@ -101,6 +102,7 @@ namespace MyDemoIssuer
                 resp.phoneVerifiationResult = "MATCH";
                 resp.emailVerifiationResult = "MATCH";
                 resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "MATCH";
 
                 resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
                 resp.decision = "AUTHENTICATE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
@@ -129,6 +131,7 @@ namespace MyDemoIssuer
                 resp.phoneVerifiationResult = "MATCH";
                 resp.emailVerifiationResult = "MATCH";
                 resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "MATCH";
 
                 resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
                 //resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
@@ -169,6 +172,7 @@ namespace MyDemoIssuer
                 resp.phoneVerifiationResult = "MATCH";
                 resp.emailVerifiationResult = "MATCH";
                 resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "MATCH";
 
                 resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
                 //resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
@@ -194,9 +198,10 @@ namespace MyDemoIssuer
                 resp.phoneVerifiationResult = "MATCH";
                 resp.emailVerifiationResult = "MATCH";
                 resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "INVALID";
 
                 resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
-                resp.decision = "AUTHENTICATE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+                //resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
 
                 resp.accountHolderInfo = new AccountHolderInfo();
 

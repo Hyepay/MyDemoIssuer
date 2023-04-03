@@ -68,7 +68,10 @@
             public string? emailVerifiationResult           { get; set; }
             public string? phoneVerifiationResult           { get; set; }
 
-            public string? accountStatus                    { get; set; }   //optionnal 
+            public string? expiryDateVerifiationResult { get; set; }
+
+
+        public string? accountStatus                    { get; set; }   //optionnal 
 
             public string? decision                         { get; set; }  //optionnal 
 
