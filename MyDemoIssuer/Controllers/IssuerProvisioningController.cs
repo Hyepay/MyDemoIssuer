@@ -91,6 +91,33 @@ namespace MyDemoIssuer
                 return Ok(resp);
             }
 
+            if (provisionningRequest.correlationId == "100001")     // Test 200 Valid Response 
+            {
+                var resp = new ProvisionningverificationResponse();
+
+                // var test = new TestClass(); /* For test */
+
+                resp.SecurityCodeVerifiationResult = "MATCH";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "MATCH";
+
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                resp.accountHolderInfo = new AccountHolderInfo();
+
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
+
+
+                return Ok(resp);
+            }
+
 
             if (provisionningRequest.correlationId == "123457")     // Test 200 Valid Response AUTH REQUIRE 
             {
@@ -120,7 +147,8 @@ namespace MyDemoIssuer
             }
 
 
-            if (provisionningRequest.correlationId == "111111")     // Test 200 Valid Response but missed field decision
+            if (provisionningRequest.correlationId == "111111")     // Test 200 Valid Response but missed field decision 
+                                                                    // if onbehalf setup for risk assesement and decisioning, perform decision
             {
 
                 var resp = new ProvisionningverificationResponse();
@@ -146,6 +174,35 @@ namespace MyDemoIssuer
 
                 return Ok(resp);
             }
+
+
+            if (provisionningRequest.correlationId == "999000")     // Test DECLINE  
+            {
+
+                var resp = new ProvisionningverificationResponse();
+
+                // var test = new TestClass(); /* For test */
+
+                resp.SecurityCodeVerifiationResult = "MATCH";
+                resp.phoneVerifiationResult = "MATCH";
+                resp.emailVerifiationResult = "MATCH";
+                resp.addressVerifiationResult = "MATCH";
+                resp.expiryDateVerifiationResult = "MATCH";
+
+                resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                resp.decision = "DECLINE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                resp.accountHolderInfo = new AccountHolderInfo();
+
+                resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+                resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
+
+                return Ok(resp);
+            }
+
 
             if (provisionningRequest.correlationId == "222222")     // Test 400 Error
             {
