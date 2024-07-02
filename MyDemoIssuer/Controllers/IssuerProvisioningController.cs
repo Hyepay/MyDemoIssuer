@@ -124,6 +124,7 @@ namespace MyDemoIssuer
                 {
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerifiationResult = "INVALID";
+                    resp.SecurityCodeVerifiationResult = "P";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
