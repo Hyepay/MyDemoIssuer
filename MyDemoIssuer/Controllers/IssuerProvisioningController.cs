@@ -126,6 +126,7 @@ namespace MyDemoIssuer
                     resp.expiryDateVerifiationResult = "INVALID";
                     resp.SecurityCodeVerifiationResult = "NOT_PROCESSED";
                     resp.addressVerifiationResult = "NOT_PROCESSED";
+                    resp.accountStatus = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
@@ -137,6 +138,7 @@ namespace MyDemoIssuer
                     resp.expiryDateVerifiationResult = "MATCH";
                     resp.SecurityCodeVerifiationResult = "INVALID";
                     resp.addressVerifiationResult = "NOT_PROCESSED";
+                    resp.accountStatus = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
@@ -173,6 +175,7 @@ namespace MyDemoIssuer
                 resp.expiryDateVerifiationResult = "NOT_PROCESSED";
                 resp.SecurityCodeVerifiationResult = "NOT_PROCESSED";
                 resp.addressVerifiationResult = "NOT_PROCESSED";
+                resp.accountStatus = "NOT_PROCESSED";
                 resp.decision = "DECLINE";
 
                 return Ok(resp);
