@@ -124,7 +124,8 @@ namespace MyDemoIssuer
                 {
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerifiationResult = "INVALID";
-                    resp.SecurityCodeVerifiationResult = "P";
+                    resp.SecurityCodeVerifiationResult = "NOT_PROCESSED";
+                    resp.addressVerifiationResult = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
@@ -135,6 +136,7 @@ namespace MyDemoIssuer
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerifiationResult = "MATCH";
                     resp.SecurityCodeVerifiationResult = "INVALID";
+                    resp.addressVerifiationResult = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
@@ -168,6 +170,9 @@ namespace MyDemoIssuer
                 // the card doesn't exist
 
                 var resp = new ProvisionningverificationResponse();
+                resp.expiryDateVerifiationResult = "NOT_PROCESSED";
+                resp.SecurityCodeVerifiationResult = "NOT_PROCESSED";
+                resp.addressVerifiationResult = "NOT_PROCESSED";
                 resp.decision = "DECLINE";
 
                 return Ok(resp);
