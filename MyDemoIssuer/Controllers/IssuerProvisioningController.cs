@@ -16,6 +16,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Net;
+using Microsoft.AspNetCore.Routing;
 
 
 
@@ -42,11 +43,63 @@ namespace MyDemoIssuer
 
         private readonly ILogger<IssuerController> _logger;
 
+        private readonly List<FundingAccountData> accounts;  
+
         public IssuerController( ILogger<IssuerController> logger)
         {
 
             _logger = logger;
 
+            string jsonString1 = @"
+            {
+                ""cardData"": {
+                    ""accountNumber"": ""5555555555554444"", 
+                    ""expiryDate"": ""12/28"",
+                    ""securityCode"": ""123""
+                },
+                ""accountHolderData"": {
+                    ""accountHolderName"": ""Jam One"", 
+                    ""accountHolderAddress"": {
+                        ""line1"": ""123 Main St"",
+                        ""line2"": ""Apt 4B"",
+                        ""city"": ""SETTAT"",
+                        ""postalCode"": ""26000"",
+                        ""country"": ""MAR""
+                    },
+                    ""accountHolderEmailAddress"": ""jam.one@example.com"",
+                    ""accountHolderMobilePhoneNumber"": {
+                        ""countryDialInCode"": ""+212"",
+                        ""phoneNumber"": ""555-1234""
+                    }
+                }
+            }";
+
+            string jsonString2 = @"
+            {
+                ""cardData"": {
+                    ""accountNumber"": ""4012888888881881"", 
+                    ""expiryDate"": ""11/28"",
+                    ""securityCode"": ""321""
+                },
+                ""accountHolderData"": {
+                    ""accountHolderName"": "" Cool Jam"",
+                    ""accountHolderAddress"": {
+                        ""line1"": ""456 Elm St"",
+                        ""line2"": ""Suite 5"",
+                        ""city"": ""Othertown"",
+                        ""postalCode"": ""17500"",
+                        ""country"": ""FRA""
+                    },
+                    ""accountHolderEmailAddress"": ""Cool.Jam@example.com"",
+                    ""accountHolderMobilePhoneNumber"": {
+                        ""countryDialInCode"": ""+33"",
+                        ""phoneNumber"": ""555-5678""
+                    }
+                }
+            }";
+            List<string> stringaccounts = new List<string> { jsonString1, jsonString2 };
+
+            accounts = stringaccounts.Select(json => System.Text.Json.JsonSerializer.Deserialize<FundingAccountData>(json)).ToList();
         }
 
 
@@ -62,7 +115,63 @@ namespace MyDemoIssuer
 
             // Decrypt the JWE 
 
-            // Check the data 
+            // Search if the account number exist 
+
+            FundingAccountData foundAccount = accounts.FirstOrDefault(root => root.cardData.accountNumber == provisionningRequest.fundingAccountData.cardData.accountNumber);
+            if (foundAccount != null)
+            {
+                if (foundAccount.cardData.expiryDate!= provisionningRequest.fundingAccountData.cardData.expiryDate)
+                {
+                    var resp = new ProvisionningverificationResponse();
+                    resp.expiryDateVerifiationResult = "INVALID";
+                    resp.decision = "DECLINE";
+
+                    return Ok(resp);
+                }
+
+                if (foundAccount.cardData.securityCode != provisionningRequest.fundingAccountData.cardData.securityCode)
+                {
+                    var resp = new ProvisionningverificationResponse();
+                    resp.expiryDateVerifiationResult = "MATCH";
+                    resp.SecurityCodeVerifiationResult = "INVALID";
+                    resp.decision = "DECLINE";
+
+                    return Ok(resp);
+                }
+                else
+                {
+                    var resp = new ProvisionningverificationResponse();
+                    resp.SecurityCodeVerifiationResult = "MATCH";
+                    resp.phoneVerifiationResult = "MATCH";
+                    resp.emailVerifiationResult = "MATCH";
+                    resp.addressVerifiationResult = "MATCH";
+                    resp.expiryDateVerifiationResult = "MATCH";
+
+                    resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                    resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+                    resp.accountHolderInfo = new AccountHolderInfo();
+
+                    resp.accountHolderInfo.accountHolderEmailAddress = foundAccount.accountHolderData.accountHolderEmailAddress;
+
+                    resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+                    resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = foundAccount.accountHolderData.accountHolderMobilePhoneNumber.countryDialInCode;
+                    resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = foundAccount.accountHolderData.accountHolderMobilePhoneNumber.phoneNumber;
+
+
+                    return Ok(resp);
+                }
+            }
+            else
+            {
+                // the card doesn't exist
+
+                var resp = new ProvisionningverificationResponse();
+                resp.decision = "DECLINE";
+
+                return Ok(resp);
+            }
+        
 
             if (provisionningRequest.correlationId == "123456")     // Test 200 Valid Response 
             {
@@ -323,7 +432,13 @@ namespace MyDemoIssuer
 
         }
 
+        [HttpGet("api/v1/digitization/testdata")]
 
+        public async Task<ActionResult<TestData>> data(FundingAccountData accountData)
+        {
+            return Ok(new TestData());
 
-    }
+        }
+
+        }
 }

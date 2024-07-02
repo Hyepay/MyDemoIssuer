@@ -1,5 +1,8 @@
 ﻿namespace MyDemoIssuer.Schemas
 {
+    
+   
+    
     public class AccountHolderMobilePhoneNumber
     {
         public string? countryDialInCode { get; set; }
@@ -26,13 +29,13 @@
     {
         public CardData cardData { get; set; }
 
-        public AccountHolderData accountHolderData { get; set; }
+        public AccountHolderData? accountHolderData { get; set; }
     }
 
     public class AccountHolderData
     {
         public string? accountHolderName { get; set; }
-        public AccountHolderAddress accountHolderAddress { get; set; }
+        public AccountHolderAddress? accountHolderAddress { get; set; }
 
         public string? accountHolderEmailAddress { get; set; }
         public AccountHolderMobilePhoneNumber? accountHolderMobilePhoneNumber { get; set; }
