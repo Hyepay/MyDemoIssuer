@@ -54,7 +54,7 @@ namespace MyDemoIssuer
             {
                 ""cardData"": {
                     ""accountNumber"": ""5555555555554444"", 
-                    ""expiryDate"": ""12/28"",
+                    ""expiryDate"": ""1228"",
                     ""securityCode"": ""123""
                 },
                 ""accountHolderData"": {
@@ -78,7 +78,7 @@ namespace MyDemoIssuer
             {
                 ""cardData"": {
                     ""accountNumber"": ""4012888888881881"", 
-                    ""expiryDate"": ""11/28"",
+                    ""expiryDate"": ""1128"",
                     ""securityCode"": ""321""
                 },
                 ""accountHolderData"": {
