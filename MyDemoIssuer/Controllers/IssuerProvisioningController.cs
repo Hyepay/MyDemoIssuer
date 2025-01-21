@@ -115,6 +115,33 @@ namespace MyDemoIssuer
 
             // Decrypt the JWE 
 
+
+            // Temporary 
+            // Wait 400 ms and provide reponse 
+
+            Thread.Sleep(3000);
+            var resp = new ProvisionningverificationResponse();
+            resp.SecurityCodeVerifiationResult = "MATCH";
+            resp.phoneVerifiationResult = "MATCH";
+            resp.emailVerifiationResult = "MATCH";
+            resp.addressVerifiationResult = "MATCH";
+            resp.expiryDateVerifiationResult = "MATCH";
+
+            resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+            resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
+
+            resp.accountHolderInfo = new AccountHolderInfo();
+
+            resp.accountHolderInfo.accountHolderEmailAddress = "yrtest@email.com";
+
+            resp.accountHolderInfo.accountHolderMobilePhoneNumber = new AccountHolderMobilePhoneNumber();
+            resp.accountHolderInfo.accountHolderMobilePhoneNumber.countryDialInCode = "+254";
+            resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
+            return Ok(resp);
+
+
+
+            /*
             // Search if the account number exist 
 
             FundingAccountData foundAccount = accounts.FirstOrDefault(root => root.cardData.accountNumber == provisionningRequest.fundingAccountData.cardData.accountNumber);
@@ -186,7 +213,7 @@ namespace MyDemoIssuer
             {
                 var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "MATCH";
                 resp.phoneVerifiationResult = "MATCH";
@@ -213,7 +240,7 @@ namespace MyDemoIssuer
             {
                 var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "MATCH";
                 resp.phoneVerifiationResult = "MATCH";
@@ -241,7 +268,7 @@ namespace MyDemoIssuer
             {
                 var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "MATCH";
                 resp.phoneVerifiationResult = "MATCH";
@@ -271,7 +298,7 @@ namespace MyDemoIssuer
 
                 var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "MATCH";
                 resp.phoneVerifiationResult = "MATCH";
@@ -299,7 +326,7 @@ namespace MyDemoIssuer
 
                 var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "MATCH";
                 resp.phoneVerifiationResult = "MATCH";
@@ -326,7 +353,7 @@ namespace MyDemoIssuer
             {
 
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 return BadRequest();
             }
@@ -335,13 +362,13 @@ namespace MyDemoIssuer
             {
 
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                
 
                                var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "XXX";
                 resp.phoneVerifiationResult = "MATCH";
@@ -367,7 +394,7 @@ namespace MyDemoIssuer
 
                 var resp = new ProvisionningverificationResponse();
 
-                // var test = new TestClass(); /* For test */
+                // var test = new TestClass(); 
 
                 resp.SecurityCodeVerifiationResult = "INVALID";
                 resp.phoneVerifiationResult = "MATCH";
@@ -388,7 +415,8 @@ namespace MyDemoIssuer
 
 
                 return Ok(resp);
-            }
+            */
+            //}
         }
 
 
