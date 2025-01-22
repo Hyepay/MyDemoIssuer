@@ -117,9 +117,10 @@ namespace MyDemoIssuer
 
 
             // Temporary 
-            // Wait 300 ms and provide reponse 
+            // Wait 350 ms and provide reponse 
 
-            Thread.Sleep(350);
+            // Replace Thread.Sleep with non-blocking delay
+            await Task.Delay(350);
             var resp = new ProvisionningverificationResponse();
             resp.SecurityCodeVerifiationResult = "MATCH";
             resp.phoneVerifiationResult = "MATCH";

@@ -10,11 +10,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Using RoolinFile with Rolling packahe to write log to Azure logs. 
 
-Serilog.Core.Logger logger = new LoggerConfiguration()
+/*Serilog.Core.Logger logger = new LoggerConfiguration()
    .ReadFrom.Configuration(builder.Configuration)
    .Enrich.FromLogContext()
    .WriteTo.RollingFile("../logs/mydemoissuer.log")
-   .CreateLogger();
+   .CreateLogger();*/
+
+
+
+
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) // Read settings from appsettings.json
+    .Enrich.FromLogContext()                       // Enrich logs with contextual data
+    .WriteTo.Async(a => a.File(
+        path: "../logs/mydemoissuer-.log",         // Path with rolling file support
+        rollingInterval: RollingInterval.Day,     // Roll logs daily
+        retainedFileCountLimit: 7,                // Keep logs for 7 days
+        outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message:lj}{NewLine}{Exception}" // Custom log format
+    ))
+    .CreateLogger();
+
+
 
 
 // Add services to the container.
