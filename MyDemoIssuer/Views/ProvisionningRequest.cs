@@ -83,6 +83,27 @@
 
     }
 
+    public class InboundIssuerGWProvisionningVerificaionRequest
+    {
+
+        public string? issuerId { get; set; }
+        public string? requestId { get; set; }
+
+        public string? correlationId { get; set; }
+
+        public string? issuerUrl { get; set; }
+
+
+        public string? encryptedFundingAccountData { get; set; }
+
+
+        public InboundIssuerGWProvisionningVerificaionRequest()
+        {
+
+        }
+
+    }
+
 
     public class GoogleWalletAddress
     {

@@ -106,7 +106,7 @@ namespace MyDemoIssuer
 
         [HttpPost("api/v1/digitization/provisioningRequest")]
         //[Route("GetFundingAccounts")]
-        public async Task<ActionResult<ProvisionningverificationResponse>> Verify(ProvisionningVerificaionRequest provisionningRequest)
+        public async Task<ActionResult<ProvisionningverificationResponse>> Verify(InboundIssuerGWProvisionningVerificaionRequest provisionningRequest)
         //public async Task<ActionResult<TestClass>> Verify(ProvisionningVerificaionRequest provisionningRequest)
         {
 
@@ -119,7 +119,7 @@ namespace MyDemoIssuer
             // Temporary 
             // Wait 300 ms and provide reponse 
 
-            Thread.Sleep(300);
+            Thread.Sleep(350);
             var resp = new ProvisionningverificationResponse();
             resp.SecurityCodeVerifiationResult = "MATCH";
             resp.phoneVerifiationResult = "MATCH";
