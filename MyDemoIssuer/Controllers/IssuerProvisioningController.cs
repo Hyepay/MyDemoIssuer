@@ -122,7 +122,7 @@ namespace MyDemoIssuer
             // Replace Thread.Sleep with non-blocking delay
             await Task.Delay(350);
             var resp = new ProvisionningverificationResponse();
-            resp.SecurityCodeVerifiationResult = "MATCH";
+            resp.securityCodeVerifiationResult = "MATCH";
             resp.phoneVerifiationResult = "MATCH";
             resp.emailVerifiationResult = "MATCH";
             resp.addressVerifiationResult = "MATCH";

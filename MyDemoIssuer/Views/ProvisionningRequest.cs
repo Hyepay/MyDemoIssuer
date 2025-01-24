@@ -66,7 +66,7 @@
 
         public class ProvisionningverificationResponse
         {
-            public string? SecurityCodeVerifiationResult    { get; set; }
+            public string? securityCodeVerifiationResult    { get; set; }
             public string? addressVerifiationResult         { get; set; }
             public string? emailVerifiationResult           { get; set; }
             public string? phoneVerifiationResult           { get; set; }
