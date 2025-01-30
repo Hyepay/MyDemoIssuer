@@ -106,7 +106,8 @@ namespace MyDemoIssuer
 
         [HttpPost("api/v1/digitization/provisioningRequest")]
         //[Route("GetFundingAccounts")]
-        public async Task<ActionResult<ProvisionningverificationResponse>> Verify(InboundIssuerGWProvisionningVerificaionRequest provisionningRequest)
+        //public async Task<ActionResult<ProvisionningverificationResponse>> Verify(InboundIssuerGWProvisionningVerificaionRequest provisionningRequest)
+        public async Task<ActionResult<ProvisionningverificationResponse>> Verify(ProvisionningVerificaionRequest provisionningRequest)
         //public async Task<ActionResult<TestClass>> Verify(ProvisionningVerificaionRequest provisionningRequest)
         {
 
@@ -116,7 +117,9 @@ namespace MyDemoIssuer
             // Decrypt the JWE 
 
 
-            // Temporary 
+
+            /*
+            // Temporary Performance Test
             // Wait 350 ms and provide reponse 
 
             // Replace Thread.Sleep with non-blocking delay
@@ -140,9 +143,9 @@ namespace MyDemoIssuer
             resp.accountHolderInfo.accountHolderMobilePhoneNumber.phoneNumber = "051110222";
             return Ok(resp);
 
+            */
 
-
-            /*
+            
             // Search if the account number exist 
 
             FundingAccountData foundAccount = accounts.FirstOrDefault(root => root.cardData.accountNumber == provisionningRequest.fundingAccountData.cardData.accountNumber);
@@ -152,7 +155,7 @@ namespace MyDemoIssuer
                 {
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerifiationResult = "INVALID";
-                    resp.SecurityCodeVerifiationResult = "NOT_PROCESSED";
+                    resp.securityCodeVerifiationResult = "NOT_PROCESSED";
                     resp.addressVerifiationResult = "NOT_PROCESSED";
                     resp.accountStatus = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
@@ -164,7 +167,7 @@ namespace MyDemoIssuer
                 {
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerifiationResult = "MATCH";
-                    resp.SecurityCodeVerifiationResult = "INVALID";
+                    resp.securityCodeVerifiationResult = "INVALID";
                     resp.addressVerifiationResult = "NOT_PROCESSED";
                     resp.accountStatus = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
@@ -174,7 +177,7 @@ namespace MyDemoIssuer
                 else
                 {
                     var resp = new ProvisionningverificationResponse();
-                    resp.SecurityCodeVerifiationResult = "MATCH";
+                    resp.securityCodeVerifiationResult = "MATCH";
                     resp.phoneVerifiationResult = "MATCH";
                     resp.emailVerifiationResult = "MATCH";
                     resp.addressVerifiationResult = "MATCH";
@@ -201,7 +204,7 @@ namespace MyDemoIssuer
 
                 var resp = new ProvisionningverificationResponse();
                 resp.expiryDateVerifiationResult = "NOT_PROCESSED";
-                resp.SecurityCodeVerifiationResult = "NOT_PROCESSED";
+                resp.securityCodeVerifiationResult = "NOT_PROCESSED";
                 resp.addressVerifiationResult = "NOT_PROCESSED";
                 resp.accountStatus = "NOT_PROCESSED";
                 resp.decision = "DECLINE";
@@ -209,7 +212,7 @@ namespace MyDemoIssuer
                 return Ok(resp);
             }
         
-
+            /*
             if (provisionningRequest.correlationId == "123456")     // Test 200 Valid Response 
             {
                 var resp = new ProvisionningverificationResponse();
