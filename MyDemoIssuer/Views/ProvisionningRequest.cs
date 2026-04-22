@@ -66,15 +66,15 @@
 
         public class ProvisionningverificationResponse
         {
-            public string? securityCodeVerifiationResult    { get; set; }
-            public string? addressVerifiationResult         { get; set; }
-            public string? emailVerifiationResult           { get; set; }
-            public string? phoneVerifiationResult           { get; set; }
+            public string? securityCodeVerificationResult    { get; set; }
+            public string? addressVerificationResult         { get; set; }
+            public string? emailVerificationResult           { get; set; }
+            public string? phoneVerificationResult           { get; set; }
 
-            public string? expiryDateVerifiationResult { get; set; }
+            public string? expiryDateVerificationResult { get; set; }
 
 
-        public string? accountStatus                    { get; set; }   //optionnal 
+            public string? accountStatus                    { get; set; }   //optionnal 
 
             public string? decision                         { get; set; }  //optionnal 
 

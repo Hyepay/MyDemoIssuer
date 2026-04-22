@@ -154,9 +154,9 @@ namespace MyDemoIssuer
                 if (foundAccount.cardData.expiryDate!= provisionningRequest.fundingAccountData.cardData.expiryDate)
                 {
                     var resp = new ProvisionningverificationResponse();
-                    resp.expiryDateVerifiationResult = "INVALID";
-                    resp.securityCodeVerifiationResult = "NOT_PROCESSED";
-                    resp.addressVerifiationResult = "NOT_PROCESSED";
+                    resp.expiryDateVerificationResult = "INVALID";
+                    resp.securityCodeVerificationResult = "NOT_PROCESSED";
+                    resp.addressVerificationResult = "NOT_PROCESSED";
                     resp.accountStatus = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
@@ -166,9 +166,9 @@ namespace MyDemoIssuer
                 if (foundAccount.cardData.securityCode != provisionningRequest.fundingAccountData.cardData.securityCode)
                 {
                     var resp = new ProvisionningverificationResponse();
-                    resp.expiryDateVerifiationResult = "MATCH";
-                    resp.securityCodeVerifiationResult = "INVALID";
-                    resp.addressVerifiationResult = "NOT_PROCESSED";
+                    resp.expiryDateVerificationResult = "MATCH";
+                    resp.securityCodeVerificationResult = "INVALID";
+                    resp.addressVerificationResult = "NOT_PROCESSED";
                     resp.accountStatus = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
@@ -177,11 +177,11 @@ namespace MyDemoIssuer
                 else
                 {
                     var resp = new ProvisionningverificationResponse();
-                    resp.securityCodeVerifiationResult = "MATCH";
-                    resp.phoneVerifiationResult = "MATCH";
-                    resp.emailVerifiationResult = "MATCH";
-                    resp.addressVerifiationResult = "MATCH";
-                    resp.expiryDateVerifiationResult = "MATCH";
+                    resp.securityCodeVerificationResult = "MATCH";
+                    resp.phoneVerificationResult = "MATCH";
+                    resp.emailVerificationResult = "MATCH";
+                    resp.addressVerificationResult = "MATCH";
+                    resp.expiryDateVerificationResult = "MATCH";
 
                     resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
                     resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
@@ -203,9 +203,9 @@ namespace MyDemoIssuer
                 // the card doesn't exist
 
                 var resp = new ProvisionningverificationResponse();
-                resp.expiryDateVerifiationResult = "NOT_PROCESSED";
-                resp.securityCodeVerifiationResult = "NOT_PROCESSED";
-                resp.addressVerifiationResult = "NOT_PROCESSED";
+                resp.expiryDateVerificationResult = "NOT_PROCESSED";
+                resp.securityCodeVerificationResult = "NOT_PROCESSED";
+                resp.addressVerificationResult = "NOT_PROCESSED";
                 resp.accountStatus = "NOT_PROCESSED";
                 resp.decision = "DECLINE";
 
