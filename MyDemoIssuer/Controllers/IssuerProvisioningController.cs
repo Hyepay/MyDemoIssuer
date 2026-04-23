@@ -158,6 +158,8 @@ namespace MyDemoIssuer
                     resp.securityCodeVerificationResult = "NOT_PROCESSED";
                     resp.addressVerificationResult = "NOT_PROCESSED";
                     resp.accountStatus = "NOT_PROCESSED";
+                    resp.emailVerificationResult = "NOT_PROCESSED";
+                    resp.phoneVerificationResult = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
@@ -170,6 +172,8 @@ namespace MyDemoIssuer
                     resp.securityCodeVerificationResult = "INVALID";
                     resp.addressVerificationResult = "NOT_PROCESSED";
                     resp.accountStatus = "NOT_PROCESSED";
+                    resp.emailVerificationResult = "NOT_PROCESSED";
+                    resp.phoneVerificationResult = "NOT_PROCESSED";
                     resp.decision = "DECLINE";
 
                     return Ok(resp);
@@ -184,6 +188,8 @@ namespace MyDemoIssuer
                     resp.expiryDateVerificationResult = "MATCH";
 
                     resp.accountStatus = "ACTIVE"; // Possible value { "ACTIVE", "INACTIVE" }
+                    resp.emailVerificationResult = "NOT_PROCESSED";
+                    resp.phoneVerificationResult = "NOT_PROCESSED";
                     resp.decision = "APPROVE";  // Possible value { "APPROVE", "DECLINE", "AUTHENTICATE"  }
 
                     resp.accountHolderInfo = new AccountHolderInfo();
@@ -207,6 +213,8 @@ namespace MyDemoIssuer
                 resp.securityCodeVerificationResult = "NOT_PROCESSED";
                 resp.addressVerificationResult = "NOT_PROCESSED";
                 resp.accountStatus = "NOT_PROCESSED";
+                resp.emailVerificationResult= "NOT_PROCESSED";
+                resp.phoneVerificationResult= "NOT_PROCESSED"; 
                 resp.decision = "DECLINE";
 
                 return Ok(resp);
