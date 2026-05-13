@@ -4,12 +4,12 @@ using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.Json;
+
 
 using MyDemoIssuer.Schemas;
 
 using MyIssuerDemo.Data;
-
+using Mastercard.Developer.ClientEncryption.Core.Utils;
 
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;
@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 using System.Net;
 using Microsoft.AspNetCore.Routing;
 
-
+using Newtonsoft.Json.Linq;
 
 
 
@@ -43,9 +43,10 @@ namespace MyDemoIssuer
 
         private readonly ILogger<IssuerController> _logger;
 
-        private readonly List<FundingAccountData> accounts;  
+        private readonly List<FundingAccountData> accounts;
+        private readonly IConfiguration _config;
 
-        public IssuerController( ILogger<IssuerController> logger)
+        public IssuerController( ILogger<IssuerController> logger, IConfiguration config)
         {
 
             _logger = logger;
@@ -100,6 +101,7 @@ namespace MyDemoIssuer
             List<string> stringaccounts = new List<string> { jsonString1, jsonString2 };
 
             accounts = stringaccounts.Select(json => System.Text.Json.JsonSerializer.Deserialize<FundingAccountData>(json)).ToList();
+            _config = config;
         }
 
 
@@ -107,16 +109,54 @@ namespace MyDemoIssuer
         [HttpPost("api/v1/digitization/provisioningRequest")]
         //[Route("GetFundingAccounts")]
         //public async Task<ActionResult<ProvisionningverificationResponse>> Verify(InboundIssuerGWProvisionningVerificaionRequest provisionningRequest)
-        public async Task<ActionResult<ProvisionningverificationResponse>> Verify(ProvisionningVerificaionRequest provisionningRequest)
+        public async Task<ActionResult<ProvisionningverificationResponse>> Verify(InboundIssuerGWProvisionningVerificaionRequest provisionningRequest)
         //public async Task<ActionResult<TestClass>> Verify(ProvisionningVerificaionRequest provisionningRequest)
         {
 
             _logger.LogInformation(" Get the ProvisionningVerificaionRequest  ");
 
+            ErrorMessage errorObj = new ErrorMessage();
+
 
             // Decrypt the JWE 
 
+            _logger.LogInformation(" Decrypt Payload :{0}  ", provisionningRequest.encryptedFundingPANInfo);
 
+            // decrypt the encryptedAccountInfo using hypepay private key
+
+            var environment = _config.GetValue<string>("Env:Environment");
+            var deployment = _config.GetValue<string>("Env:Deployment");
+            RSA privateKey;
+            if (environment == "Development")
+                privateKey = EncryptionUtils.LoadDecryptionKey("C:\\Users\\opent\\source\\repos\\Hyepay\\IssuerGW\\certificate\\t2p\\private.key");
+            else
+                privateKey = EncryptionUtils.LoadDecryptionKey("../certificate/t2p/private.key");
+
+
+            string stringFundingAccountInfo;
+            try
+            {
+
+
+                stringFundingAccountInfo = Jose.JWT.Decode(provisionningRequest.encryptedFundingPANInfo, privateKey);
+
+                // Manage Error if JWE couldn't be decoded
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("Exception: {0} ", ex.StackTrace);
+
+                errorObj.responseId = provisionningRequest.requestId;
+                errorObj.errorCode = "INVALID_JWE_PAYLOAD";
+                errorObj.errorDescription = "Unable to decrypt the JWE";
+
+                return BadRequest(errorObj);
+            }
+
+            _logger.LogInformation(" JWE decrypted token :   {0}  ", stringFundingAccountInfo);
+
+
+            FundingAccountData fundingAccountData = System.Text.Json.JsonSerializer.Deserialize<FundingAccountData>(stringFundingAccountInfo);
 
             /*
             // Temporary Performance Test
@@ -145,13 +185,13 @@ namespace MyDemoIssuer
 
             */
 
-            
+
             // Search if the account number exist 
 
-            FundingAccountData foundAccount = accounts.FirstOrDefault(root => root.cardData.accountNumber == provisionningRequest.fundingAccountData.cardData.accountNumber);
+            FundingAccountData foundAccount = accounts.FirstOrDefault(root => root.cardData.accountNumber == fundingAccountData.cardData.accountNumber);
             if (foundAccount != null)
             {
-                if (foundAccount.cardData.expiryDate!= provisionningRequest.fundingAccountData.cardData.expiryDate)
+                if (foundAccount.cardData.expiryDate!= fundingAccountData.cardData.expiryDate)
                 {
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerificationResult = "INVALID";
@@ -165,7 +205,7 @@ namespace MyDemoIssuer
                     return Ok(resp);
                 }
 
-                if (foundAccount.cardData.securityCode != provisionningRequest.fundingAccountData.cardData.securityCode)
+                if (foundAccount.cardData.securityCode != fundingAccountData.cardData.securityCode)
                 {
                     var resp = new ProvisionningverificationResponse();
                     resp.expiryDateVerificationResult = "MATCH";
