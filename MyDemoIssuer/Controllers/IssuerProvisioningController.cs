@@ -115,6 +115,13 @@ namespace MyDemoIssuer
 
             _logger.LogInformation(" Get the ProvisionningVerificaionRequest  ");
 
+            // Get Peer Ip & Port Information 
+            // Get the IP address and port of the client
+            string clientIpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+            int clientPort = HttpContext.Connection.RemotePort;
+
+            _logger.LogInformation(" Peer IP Adress : {0} - Peer Port: {1}  ", clientIpAddress, clientPort);
+
             ErrorMessage errorObj = new ErrorMessage();
 
 
