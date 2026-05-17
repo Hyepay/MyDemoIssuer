@@ -113,7 +113,7 @@ namespace MyDemoIssuer
         //public async Task<ActionResult<TestClass>> Verify(ProvisionningVerificaionRequest provisionningRequest)
         {
 
-            _logger.LogInformation(" Get the ProvisionningVerificaionRequest  ");
+            _logger.LogInformation(" Get the ProvisionningVerificaionRequest {0} ", JsonConvert.SerializeObject(provisionningRequest));
 
             // Get Peer Ip & Port Information 
             // Get the IP address and port of the client
@@ -484,7 +484,7 @@ namespace MyDemoIssuer
 
         public async Task<ActionResult<ActivationCodeDeliveryResponse>> DeliverActivationCode(ActivationCodeDeliveryRequest activationCodeDeliveryRequest)
         {
-            _logger.LogInformation(" Get the  PDeliverActivationcode Request  ");
+            _logger.LogInformation(" Get the  PDeliverActivationcode Request  {0}", JsonConvert.SerializeObject(activationCodeDeliveryRequest));
 
             var resp = new ActivationCodeDeliveryResponse();
             resp.responseId = activationCodeDeliveryRequest.requestId;

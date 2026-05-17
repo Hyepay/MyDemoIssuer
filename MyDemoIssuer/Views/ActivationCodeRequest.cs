@@ -36,7 +36,7 @@ public class ActivationCodeDeliveryRequest
         public string expirationDateTime { get; set; } // : "2016-07-04T12:08:56.123-07:00",
 
         public ActivationMethod activationMethod { get; set; }
-        public List<string>? reasonCodes { get; set; }  //   "reasonCodes": [   "ADD_CARD" ]
+        public string reasonCodes { get; set; }  //   "reasonCodes": [   "ADD_CARD" ]
 
         public DeviceInfo?  deviceInfo { get; set; }
 
